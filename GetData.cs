@@ -11,6 +11,9 @@ namespace Hopeful
     class GetData : ISubject
     {
         public ArrayList observers;
+        public string[] rainfall;
+        public string[] temperature;
+        public string location;
         public GetData()
         {
             observers = new ArrayList();
@@ -32,7 +35,7 @@ namespace Hopeful
         {
             foreach (IObserver observer in observers)
             {
-                observer.update();
+                observer.update(location, rainfall, temperature);
             }
         }
 
@@ -41,10 +44,12 @@ namespace Hopeful
             NotifyObserver();
         }
 
-        public void setData(MelbourneWeather2PortTypeClient client, string location)
+        public void setData(string location, string[] rainfall, string[] temperature)
         {
-            GetLocation local = new GetLocation(client, location);
-            local.update();
+            this.location = location;
+            this.rainfall = rainfall;
+            this.temperature = temperature;
         }
+
     }
 }

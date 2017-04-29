@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,37 +8,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Hopeful.MelborneWeatherService;
+using System.Collections;
 
 namespace Hopeful
 {
 	public partial class CfrmWeather : Form
 	{
-		GetData data = new GetData();
 		public CheckBox check;
-		public Label labelR;
-		public Label labelT;
-		public CfrmWeather()
+        private ArrayList controlCollection = new ArrayList();
+
+        private MelbourneWeather2PortTypeClient client = new MelbourneWeather2PortTypeClient("MelbourneWeather2HttpSoap12Endpoint");
+        private GetData getData;
+        private GetLocation observer;
+        private WeatherService soapService;
+        public CfrmWeather()
 		{
 			InitializeComponent();
 		}
 
-		private void cmbLocations_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			MelbourneWeather2PortTypeClient client = new MelbourneWeather2PortTypeClient("MelbourneWeather2HttpSoap12Endpoint");
-
-			string location = cmbLocations.SelectedItem.ToString();
-			GetLocation local = new GetLocation(client, location);
-			data.RegisterObserver(local);
-			
-		}
-
 		private void CfrmWeather_Load(object sender, EventArgs e)
 		{
-			MelbourneWeather2PortTypeClient client = new MelbourneWeather2PortTypeClient("MelbourneWeather2HttpSoap12Endpoint");
-			GetLocation locations = new GetLocation(client);
-			//tmrUpdate.Start();
-			tlpLocations.Visible = true;
-			foreach (string location in locations.Locations())
+            getData = new GetData();
+            soapService = new SOAPService(client);
+			foreach (string location in soapService.getLocation())
 			{
 				cmbLocations.Items.Add(location);
 			}
@@ -46,12 +38,18 @@ namespace Hopeful
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			MelbourneWeather2PortTypeClient client = new MelbourneWeather2PortTypeClient("MelbourneWeather2HttpSoap12Endpoint");
-
+            string[] rain = new string[2]{"", ""};
+            string[] temp = new string[2] { "", "" }; 
 			string location = cmbLocations.SelectedItem.ToString();
-			GetLocation local = new GetLocation(client, location);
-			data.RegisterObserver(local);
-			tableAdd();
+            if (ckbRainfall.Checked)
+                rain = soapService.getRainfall(location);
+            if (ckbTemp.Checked)
+                temp = soapService.getTemperature(location);
+
+            observer = new GetLocation(getData);
+            observer.update(location, rain, temp);
+            getData.RegisterObserver(observer);
+			tableAdd(observer);
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
@@ -61,102 +59,41 @@ namespace Hopeful
 
 		private void tmrUpdate_Tick(object sender, EventArgs e)
 		{
-			data.NotifyObserver();
+			getData.NotifyObserver();
 		}
+
 
 		private void tableRemove()
 		{
-			if (check.Checked)
-			{
-				foreach (GetLocation location in data.observers)
-				{
-					if (check.Text.Equals(location.location))
-					{
-						data.RemoveObserver(location);
-						break;
-					}
-				}
-				tlpLocations.Controls.Remove(check);
-				tlpLocations.Controls.Remove(labelR);
-				tlpLocations.Controls.Remove(labelT);
-				tlpLocations.RowCount = data.observers.Count;
-			}
-		}
+            int i;
+            foreach(CheckBox check in tlpLocations.Controls)
+            {
+                if (check.Checked)
+                {
+                    i = tlpLocations.Controls.GetChildIndex(check);
+                    observer = (GetLocation)getData.observers[i];
+                    getData.RemoveObserver(observer);
+                    tlpLocations.Controls.Remove(check);
 
-		private void tableAdd()
-		{
-			check = new CheckBox();
-			labelR = new Label();
-			labelT = new Label();
-			check.AutoSize = true;
-			labelR.AutoSize = true;
-			labelT.AutoSize = true;
-			tlpLocations.Visible = true;
+                }
+            }
+            test();
+        }
 
-			foreach (GetLocation location in data.observers)
-			{
-				check.Text = location.location;
-				tlpLocations.Controls.Add(check);
-			}
-
-			//rainfall and temperature
-			if (ckbRainfall.Checked == true && ckbTemp.Checked == true)
-			{
-				foreach (GetLocation location in data.observers)
-				{
-					labelR.Text = "Rainfall:" + location.getRainfall();
-					labelT.Text = "Temperature:" + location.getTemperature();
-					tlpLocations.Controls.Add(labelR);
-					tlpLocations.Controls.Add(labelT);
-					labelR.Visible = true;
-				labelT.Visible = true;
-				}
-
-			}
-
-			//rainfall
-			if (ckbRainfall.Checked == true)
-			{
-				foreach (GetLocation location in data.observers)
-				{
-					labelR.Text = "Rainfall:" + location.getRainfall();
-					tlpLocations.Controls.Add(labelR);
-				}
-			}
-			else
-			{
-				labelR.Visible = true;
-			}
-
-			//temperature
-			if (ckbTemp.Checked == true)
-			{
-				foreach (GetLocation location in data.observers)
-				{
-					labelT.Text = "Temperature:" + location.getTemperature();
-					tlpLocations.Controls.Add(labelT);
-				}
-			}
-			else
-			{
-				labelT.Visible = true;
-			}
-		}
-
-		private void ckbRainfall_CheckedChanged(object sender, EventArgs e)
-		{
-			
-		}
-
-		private void ckbTemp_CheckedChanged(object sender, EventArgs e)
-		{
-			
-		}
-
-		private void tlpLocations_Paint(object sender, PaintEventArgs e)
-		{
-				
-		}
+        private void tableAdd(GetLocation location)
+        {
+            //this.check.Equals(check);
+            check = new CheckBox();
+            check.AutoSize = true;
+            tlpLocations.Visible = true;
+            check.Name = location.location;
+            check.Text = location.location;
+            if (ckbRainfall.Checked)
+                check.Text += "\nRainfall: " + location.rainfall[1];
+            if (ckbTemp.Checked)
+                check.Text += "\nTemperature: " + location.temperature[1];
+            tlpLocations.Controls.Add(check);
+        }
 	}
 }
 

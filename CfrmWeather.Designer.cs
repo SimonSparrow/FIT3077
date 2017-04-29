@@ -35,20 +35,21 @@
             this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
             this.ckbRainfall = new System.Windows.Forms.CheckBox();
             this.ckbTemp = new System.Windows.Forms.CheckBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tlpLocations = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
             // 
             // cmbLocations
             // 
             this.cmbLocations.FormattingEnabled = true;
-            this.cmbLocations.Location = new System.Drawing.Point(12, 203);
+            this.cmbLocations.Location = new System.Drawing.Point(41, 1);
             this.cmbLocations.Name = "cmbLocations";
-            this.cmbLocations.Size = new System.Drawing.Size(121, 21);
+            this.cmbLocations.Size = new System.Drawing.Size(172, 21);
             this.cmbLocations.TabIndex = 1;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 276);
+            this.btnAdd.Location = new System.Drawing.Point(263, 26);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 3;
@@ -58,7 +59,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(13, 305);
+            this.btnRemove.Location = new System.Drawing.Point(344, 26);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 4;
@@ -68,13 +69,14 @@
             // 
             // tmrUpdate
             // 
-            this.tmrUpdate.Interval = 300000;
+            this.tmrUpdate.Enabled = true;
+            this.tmrUpdate.Interval = 500000;
             this.tmrUpdate.Tick += new System.EventHandler(this.tmrUpdate_Tick);
             // 
             // ckbRainfall
             // 
             this.ckbRainfall.AutoSize = true;
-            this.ckbRainfall.Location = new System.Drawing.Point(12, 230);
+            this.ckbRainfall.Location = new System.Drawing.Point(263, 3);
             this.ckbRainfall.Name = "ckbRainfall";
             this.ckbRainfall.Size = new System.Drawing.Size(61, 17);
             this.ckbRainfall.TabIndex = 5;
@@ -84,7 +86,7 @@
             // ckbTemp
             // 
             this.ckbTemp.AutoSize = true;
-            this.ckbTemp.Location = new System.Drawing.Point(13, 253);
+            this.ckbTemp.Location = new System.Drawing.Point(344, 3);
             this.ckbTemp.Name = "ckbTemp";
             this.ckbTemp.Size = new System.Drawing.Size(86, 17);
             this.ckbTemp.TabIndex = 6;
@@ -93,26 +95,24 @@
             // 
             // tlpLocations
             // 
-            this.tlpLocations.AutoSize = true;
-            this.tlpLocations.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tlpLocations.ColumnCount = 3;
-            this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpLocations.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tlpLocations.Location = new System.Drawing.Point(0, 0);
+            this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.92738F));
+            this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.07262F));
+            this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 171F));
+            this.tlpLocations.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tlpLocations.Location = new System.Drawing.Point(0, 164);
             this.tlpLocations.Name = "tlpLocations";
             this.tlpLocations.RowCount = 1;
-            this.tlpLocations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpLocations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpLocations.Size = new System.Drawing.Size(296, 2);
-            this.tlpLocations.TabIndex = 7;
+            this.tlpLocations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.37276F));
+            this.tlpLocations.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.62724F));
+            this.tlpLocations.Size = new System.Drawing.Size(529, 229);
+            this.tlpLocations.TabIndex = 9;
             // 
             // CfrmWeather
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(296, 337);
+            this.ClientSize = new System.Drawing.Size(529, 393);
             this.Controls.Add(this.tlpLocations);
             this.Controls.Add(this.ckbTemp);
             this.Controls.Add(this.ckbRainfall);
@@ -120,7 +120,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.cmbLocations);
             this.Name = "CfrmWeather";
-            this.Text = "Weather";
+            this.Text = "Melbourne Weather App";
             this.Load += new System.EventHandler(this.CfrmWeather_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -135,6 +135,7 @@
         private System.Windows.Forms.Timer tmrUpdate;
         private System.Windows.Forms.CheckBox ckbRainfall;
         private System.Windows.Forms.CheckBox ckbTemp;
+		private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TableLayoutPanel tlpLocations;
     }
 }

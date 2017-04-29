@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hopeful.MelborneWeatherService;
 
 namespace Hopeful
 {
-    interface IObserver
+    interface WeatherService
     {
-        void update(string location, string[] rainfall, string[] temp);
+        string[] getLocation();
+        string[] getRainfall(string location);
+        string[] getTemperature(string location);
     }
 }

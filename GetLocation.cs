@@ -7,59 +7,22 @@ using Hopeful.MelborneWeatherService;
 
 namespace Hopeful
 {
-    class GetLocation : IObserver, IDisplay
+    class GetLocation : IObserver
     {
-        public MelbourneWeather2PortTypeClient client;
-        public string rainfall;
-        public string temperature;
+        public string[] rainfall;
+        public string[] temperature;
         public string location;
 
-        public GetLocation(MelbourneWeather2PortTypeClient client, string location)
+        private ISubject data;
+        public GetLocation(ISubject data)
         {
-            this.client = client;
+            this.data = data;
+        }
+        public void update(string location, string[] rainfall, string[] temperature)
+        {
             this.location = location;
-        }
-
-        public GetLocation(MelbourneWeather2PortTypeClient client)
-        {
-            this.client = client;
-        }
-        public string[] Locations()
-        {
-            
-            getLocationsRequest locationsRequest = new getLocationsRequest();
-            getLocationsResponse locationsResponse = new getLocationsResponse(client.getLocations());
-            string[] locations = locationsResponse.@return;
-            return locations;
-        }
-
-        public void update()
-        {
-            rainfall = getRainfall();
-            temperature = getTemperature();
-        }
-
-        public object Display()
-        {
-            return "Location: " + location + "\nRainfall: " + rainfall + " mm\nTemperature: " + temperature + "\n\n";
-        }
-
-        public string getRainfall()
-        {
-            getRainfallRequest rainfallRequest = new getRainfallRequest();
-            rainfallRequest.location = location;
-            getRainfallResponse rainfallResponse = new getRainfallResponse(client.getRainfall(location));
-            string[] rainfallData = rainfallResponse.@return;
-            return rainfallData[1];
-        }
-
-        public string getTemperature()
-        {
-            getTemperatureRequest temperatureRequest = new getTemperatureRequest();
-            temperatureRequest.location = location;
-            getTemperatureResponse temperatureResponse = new getTemperatureResponse(client.getTemperature(location));
-            string[] temperatureData = temperatureResponse.@return;
-            return temperatureData[1];
+            this.rainfall = rainfall;
+            this.temperature = temperature;
         }
     }
 }
