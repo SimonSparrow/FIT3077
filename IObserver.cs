@@ -9,6 +9,6 @@ namespace Hopeful
 {
     interface IObserver
     {
-        void update(string location, string[] rainfall, string[] temp);
+        void update();
     }
 }
