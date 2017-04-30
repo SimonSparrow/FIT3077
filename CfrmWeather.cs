@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Hopeful.MelborneWeatherService;
 using System.Collections;
+using System.Diagnostics;
 
 namespace Hopeful
 {
@@ -16,11 +17,12 @@ namespace Hopeful
 	{
 		public CheckBox check;
         private ArrayList controlCollection = new ArrayList();
-
+        
         private MelbourneWeather2PortTypeClient client = new MelbourneWeather2PortTypeClient("MelbourneWeather2HttpSoap12Endpoint");
         private GetData getData;
         private GetLocation observer;
         private WeatherService soapService;
+        private Stopwatch sw = new Stopwatch();
         public CfrmWeather()
 		{
 			InitializeComponent();
@@ -29,8 +31,9 @@ namespace Hopeful
 		private void CfrmWeather_Load(object sender, EventArgs e)
 		{
             getData = new GetData();
+            timer1.Start();
             soapService = new SOAPService(client);
-			foreach (string location in soapService.getLocation())
+            foreach (string location in soapService.getLocation())
 			{
 				cmbLocations.Items.Add(location);
 			}
@@ -57,12 +60,6 @@ namespace Hopeful
 			tableRemove();
 		}
 
-		private void tmrUpdate_Tick(object sender, EventArgs e)
-		{
-			getData.NotifyObserver();
-		}
-
-
 		private void tableRemove()
 		{
             int i;
@@ -77,12 +74,10 @@ namespace Hopeful
 
                 }
             }
-            test();
         }
 
         private void tableAdd(GetLocation location)
         {
-            //this.check.Equals(check);
             check = new CheckBox();
             check.AutoSize = true;
             tlpLocations.Visible = true;
@@ -94,6 +89,21 @@ namespace Hopeful
                 check.Text += "\nTemperature: " + location.temperature[1];
             tlpLocations.Controls.Add(check);
         }
-	}
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (getData.observers.Count > 0)
+            {
+                sw.Start();
+                if (sw.Elapsed.Minutes > 5)
+                {
+                    getData.NotifyObserver();
+                    sw.Restart();
+                }
+            }
+            
+            lblTime.Text = sw.Elapsed.Minutes.ToString() + ":" + sw.Elapsed.Seconds.ToString("00");
+        }
+    }
 }
 
