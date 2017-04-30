@@ -32,11 +32,11 @@
             this.cmbLocations = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
-            this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
             this.ckbRainfall = new System.Windows.Forms.CheckBox();
             this.ckbTemp = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tlpLocations = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cmbLocations
@@ -67,12 +67,6 @@
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
-            // tmrUpdate
-            // 
-            this.tmrUpdate.Enabled = true;
-            this.tmrUpdate.Interval = 500000;
-            this.tmrUpdate.Tick += new System.EventHandler(this.tmrUpdate_Tick);
-            // 
             // ckbRainfall
             // 
             this.ckbRainfall.AutoSize = true;
@@ -93,12 +87,17 @@
             this.ckbTemp.Text = "Temperature";
             this.ckbTemp.UseVisualStyleBackColor = true;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // tlpLocations
             // 
+            this.tlpLocations.AutoScroll = true;
             this.tlpLocations.ColumnCount = 3;
             this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.92738F));
             this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.07262F));
-            this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 171F));
+            this.tlpLocations.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
             this.tlpLocations.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tlpLocations.Location = new System.Drawing.Point(0, 164);
             this.tlpLocations.Name = "tlpLocations";
@@ -108,11 +107,21 @@
             this.tlpLocations.Size = new System.Drawing.Size(529, 229);
             this.tlpLocations.TabIndex = 9;
             // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Location = new System.Drawing.Point(38, 31);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(0, 13);
+            this.lblTime.TabIndex = 10;
+            // 
             // CfrmWeather
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(529, 393);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.tlpLocations);
             this.Controls.Add(this.ckbTemp);
             this.Controls.Add(this.ckbRainfall);
@@ -132,11 +141,11 @@
         private System.Windows.Forms.ComboBox cmbLocations;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.Timer tmrUpdate;
         private System.Windows.Forms.CheckBox ckbRainfall;
         private System.Windows.Forms.CheckBox ckbTemp;
 		private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TableLayoutPanel tlpLocations;
+        private System.Windows.Forms.Label lblTime;
     }
 }
 
