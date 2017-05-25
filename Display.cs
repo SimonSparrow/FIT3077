@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace SEStage2
 {
-    interface ISubject
+    interface Display
     {
-        void RegisterObserver(IObserver o);
-        void RemoveObserver(IObserver o);
-        void NotifyObserver();
+        object display();
     }
 }

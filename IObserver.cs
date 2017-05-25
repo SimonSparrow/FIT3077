@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hopeful.MelborneWeatherService;
 
-namespace Hopeful
+namespace SEStage2
 {
     interface IObserver
     {
-        void update(string location, string[] rainfall, string[] temp);
+        void updateRainfall(object rain);
+        void updateTemperature(object temp);
+        void updateWeatherData(object rain, object temp);
+        void updateTimeLapse(object timelapse);
     }
 }

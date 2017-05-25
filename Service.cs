@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace SEStage2
 {
-    interface ISubject
+    abstract class Service
     {
-        void RegisterObserver(IObserver o);
-        void RemoveObserver(IObserver o);
-        void NotifyObserver();
+        public abstract object getLocation();
+
     }
 }

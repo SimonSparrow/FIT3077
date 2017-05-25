@@ -3,42 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hopeful.MelborneWeatherService;
+using SEStage2.MelborneWeatherService;
 
-namespace Hopeful 
+namespace SEStage2
 {
-    class SOAPService : WeatherService
+    class SOAPService : Service
     {
         private MelbourneWeather2PortTypeClient client;
-        public SOAPService (MelbourneWeather2PortTypeClient client)
+
+        public SOAPService(MelbourneWeather2PortTypeClient client)
         {
             this.client = client;
         }
 
-        public string[] getLocation()
+        public override object getLocation()
         {
             getLocationsRequest locationsRequest = new getLocationsRequest();
             getLocationsResponse locationsResponse = new getLocationsResponse(client.getLocations());
-            string[] locations = locationsResponse.@return;
-            return locations;
+            return locationsResponse.@return; 
         }
 
-        public string[] getRainfall(string location)
+        public object getRainfall(string location)
         {
             getRainfallRequest rainfallRequest = new getRainfallRequest();
             rainfallRequest.location = location;
             getRainfallResponse rainfallResponse = new getRainfallResponse(client.getRainfall(location));
-            string[] rainfallData = rainfallResponse.@return;
-            return rainfallData;
+            return rainfallResponse.@return;
         }
 
-        public string[] getTemperature(string location)
+        public object getTemperature(string location)
         {
             getTemperatureRequest temperatureRequest = new getTemperatureRequest();
             temperatureRequest.location = location;
             getTemperatureResponse temperatureResponse = new getTemperatureResponse(client.getTemperature(location));
-            string[] temperatureData = temperatureResponse.@return;
-            return temperatureData;
+            return temperatureResponse.@return;
         }
     }
 }
