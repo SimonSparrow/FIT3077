@@ -1,0 +1,10 @@
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\bin\Debug\SEStage2.exe.config
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\bin\Debug\SEStage2.exe
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\bin\Debug\SEStage2.pdb
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\obj\Debug\SEStage2.csprojResolveAssemblyReference.cache
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\obj\Debug\SEStage2.Form1.resources
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\obj\Debug\SEStage2.Properties.Resources.resources
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\obj\Debug\SEStage2.csproj.GenerateResource.Cache
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\obj\Debug\SEStage2.exe
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\obj\Debug\SEStage2.pdb
+C:\Users\jsksp\Desktop\SEStage2\SEStage2\obj\Debug\SEStage2.CfrmMonitors.resources
