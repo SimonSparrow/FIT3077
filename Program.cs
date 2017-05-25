@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Hopeful
+namespace SEStage2
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Hopeful
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CfrmWeather());
+            Application.Run(new Form1());
         }
     }
 }
