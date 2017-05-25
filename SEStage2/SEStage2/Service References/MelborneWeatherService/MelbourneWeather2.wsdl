@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://MelbourneWeather2" xmlns:ns1="http://org.apache.axis2/xsd" targetNamespace="http://MelbourneWeather2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>MelbourneWeather2</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://MelbourneWeather2">
+      <xs:complexType name="Exception">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Exception" nillable="true" type="xs:anyType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Exception">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Exception" nillable="true" type="ns:Exception" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLocationsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTemperature">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="location" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTemperatureResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRainfall">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="location" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRainfallResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getRainfallRequest">
+    <wsdl:part name="parameters" element="ns:getRainfall" />
+  </wsdl:message>
+  <wsdl:message name="getRainfallResponse">
+    <wsdl:part name="parameters" element="ns:getRainfallResponse" />
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="parameters" element="ns:Exception" />
+  </wsdl:message>
+  <wsdl:message name="getTemperatureRequest">
+    <wsdl:part name="parameters" element="ns:getTemperature" />
+  </wsdl:message>
+  <wsdl:message name="getTemperatureResponse">
+    <wsdl:part name="parameters" element="ns:getTemperatureResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLocationsRequest" />
+  <wsdl:message name="getLocationsResponse">
+    <wsdl:part name="parameters" element="ns:getLocationsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MelbourneWeather2PortType">
+    <wsdl:operation name="getRainfall">
+      <wsdl:input wsaw:Action="urn:getRainfall" message="ns:getRainfallRequest" />
+      <wsdl:output wsaw:Action="urn:getRainfallResponse" message="ns:getRainfallResponse" />
+      <wsdl:fault wsaw:Action="urn:getRainfallException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getTemperature">
+      <wsdl:input wsaw:Action="urn:getTemperature" message="ns:getTemperatureRequest" />
+      <wsdl:output wsaw:Action="urn:getTemperatureResponse" message="ns:getTemperatureResponse" />
+      <wsdl:fault wsaw:Action="urn:getTemperatureException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="getLocations">
+      <wsdl:input wsaw:Action="urn:getLocations" message="ns:getLocationsRequest" />
+      <wsdl:output wsaw:Action="urn:getLocationsResponse" message="ns:getLocationsResponse" />
+      <wsdl:fault wsaw:Action="urn:getLocationsException" name="Exception" message="ns:Exception" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MelbourneWeather2Soap11Binding" type="ns:MelbourneWeather2PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getRainfall">
+      <soap:operation soapAction="urn:getRainfall" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperature">
+      <soap:operation soapAction="urn:getTemperature" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLocations">
+      <soap:operation soapAction="urn:getLocations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MelbourneWeather2Soap12Binding" type="ns:MelbourneWeather2PortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getRainfall">
+      <soap12:operation soapAction="urn:getRainfall" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperature">
+      <soap12:operation soapAction="urn:getTemperature" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLocations">
+      <soap12:operation soapAction="urn:getLocations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap12:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MelbourneWeather2HttpBinding" type="ns:MelbourneWeather2PortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getRainfall">
+      <http:operation location="MelbourneWeather2/getRainfall" />
+      <wsdl:input>
+        <mime:content part="getRainfall" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getRainfall" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperature">
+      <http:operation location="MelbourneWeather2/getTemperature" />
+      <wsdl:input>
+        <mime:content part="getTemperature" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getTemperature" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLocations">
+      <http:operation location="MelbourneWeather2/getLocations" />
+      <wsdl:input>
+        <mime:content part="getLocations" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLocations" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MelbourneWeather2">
+    <wsdl:port name="MelbourneWeather2HttpSoap11Endpoint" binding="ns:MelbourneWeather2Soap11Binding">
+      <soap:address location="http://viper.infotech.monash.edu.au:8180/axis2/services/MelbourneWeather2.MelbourneWeather2HttpSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="MelbourneWeather2HttpSoap12Endpoint" binding="ns:MelbourneWeather2Soap12Binding">
+      <soap12:address location="http://viper.infotech.monash.edu.au:8180/axis2/services/MelbourneWeather2.MelbourneWeather2HttpSoap12Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="MelbourneWeather2HttpEndpoint" binding="ns:MelbourneWeather2HttpBinding">
+      <http:address location="http://viper.infotech.monash.edu.au:8180/axis2/services/MelbourneWeather2.MelbourneWeather2HttpEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
